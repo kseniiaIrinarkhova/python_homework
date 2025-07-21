@@ -41,9 +41,6 @@ def calc(arg1, arg2, operation = 'multiply'):
             case 'multiply':
                 result = arg1 * arg2
             case 'divide':
-                #check if the second argument is zero. If so, raise the ZeroDivisionError exception
-                if arg2== 0:
-                    raise ZeroDivisionError("You can't divide by 0!")
                 result = arg1 / arg2
             case 'modulo':
                 result = arg1 % arg2
@@ -57,7 +54,7 @@ def calc(arg1, arg2, operation = 'multiply'):
     except TypeError as e:
         return f"You can't {operation} those values!"
     except ZeroDivisionError as e:
-        return f"{e}"
+        return f"You can't divide by 0!"
     except ValueError as e:
         return f"{e}"
     else:
@@ -69,7 +66,7 @@ def calc(arg1, arg2, operation = 'multiply'):
 # print(calc(5,6))
 # print(calc(7,6,'add'))
 # print(calc("7",6,'add'))
-# print(calc(7,True,'add'))
+# print(f"Case, when only manual type check show the error: {calc(7,True,'add')}")
 # print(calc(5,6,'subtract'))
 # print(calc(5,6, 'divide'))
 # print(calc(5,0, 'divide'))
