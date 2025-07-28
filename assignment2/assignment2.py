@@ -143,6 +143,18 @@ def employee_find(employee_id):
         #print stack of commands from exception
         print(f"Stack trace: {stack_trace}")
 
-print(f'{employee_find(3)}')
-print(f'{employee_find("2")}')
+# print(f'{employee_find(3)}')
+# print(f'{employee_find("2")}')
     
+#Task 6: Find the Employee with a Lambda
+
+#function that returns employees by id
+#employee_id:int - employee ID
+#return: list - list of employees with id == employee_id 
+def employee_find_2(employee_id):
+     #filter employees["rows"] list with lambda function by id
+     matches = list(filter(lambda row : int(row[employee_id_column]) == employee_id , employees["rows"]))
+     return matches
+
+print(f'{employee_find_2(3)}')
+print(f'{employee_find_2("2")}')
