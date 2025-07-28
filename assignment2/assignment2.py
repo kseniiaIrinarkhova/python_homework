@@ -11,8 +11,12 @@ csv_rows = list()
 try:
     with open('employees.csv', 'r') as file:
         reader = csv.reader(file)
+        csv_data_dict['fields'] = next(reader)
         for row in reader:
-            print(row)
+            csv_rows.append(row)
+        csv_data_dict['rows'] = csv_rows
+        print(csv_data_dict)
+            
 except Exception as e:
     print(f'Exception: {e}')
 else:
