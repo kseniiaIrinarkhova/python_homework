@@ -60,9 +60,26 @@ employees = read_employees()
 #field_name:string - name of the field 
 #retun - index of column
 def column_index(field_name):
-    return employees["fields"].index(field_name)
+    try:
+        return employees["fields"].index(field_name)
+    except Exception as e:
+        #print type of exception
+        print(f"An exception occurred {type(e).__name__}")
+        # get and print exception message
+        message = str(e)
+        if message:
+            print(f'Exception message: {message}')
+        #trace back exception
+        trace_back = traceback.extract_tb(e.__traceback__)
+        stack_trace = list()
+        #create a stack of commands
+        for trace in trace_back:
+            stack_trace.append(f'File: {trace[0]}, Line : {trace[1]}, Func.Name : {trace[2]}, Message : {trace[3]}')
+        #print stack of commands from exception
+        print(f"Stack trace: {stack_trace}")
 
 #test the output
+print(f"{column_index("employee_desc")}")
 employee_id_column = column_index("employee_id")
 print(f'{employee_id_column}')
 
