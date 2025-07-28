@@ -16,7 +16,6 @@ try:
             user_output = input(system_prompt)
             #break the loop if user commanded
             if user_output == 'done for now':
-                raise ValueError("Oh no, You finish the diary!")
                 break
             #add user's output to file
             file.write(user_output + '\n')
