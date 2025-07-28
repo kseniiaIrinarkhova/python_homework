@@ -2,11 +2,18 @@
 import csv
 import traceback
 
+#global variables:
+global employees
+global employee_id_column
+
 #Task 2: Read a CSV File
 
-global employees
-
 #function that read csv file and returned employees data
+#return - dictionary of data from csv file:
+#{
+#[Key: fields]: list()
+#[Key: rows]: list()
+#}
 def read_employees():
     #declare variables
     csv_data_dict = dict()
@@ -43,5 +50,19 @@ def read_employees():
         #print stack of commands from exception
         print(f"Stack trace: {stack_trace}")
 
+#test the output
 employees = read_employees()
-print(f"{employees} len={len(employees)}")
+# print(f"{employees} len={len(employees)}")
+
+#Task 3: Find the Column Index
+
+#function for getting column index
+#field_name:string - name of the field 
+#retun - index of column
+def column_index(field_name):
+    return employees["fields"].index(field_name)
+
+#test the output
+employee_id_column = column_index("employee_id")
+print(f'{employee_id_column}')
+
