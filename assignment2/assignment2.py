@@ -79,9 +79,9 @@ def column_index(field_name):
         print(f"Stack trace: {stack_trace}")
 
 #test the output
-print(f"{column_index("employee_desc")}")
+# print(f"{column_index("employee_desc")}")
 employee_id_column = column_index("employee_id")
-print(f'{employee_id_column}')
+# print(f'{employee_id_column}')
 
 #Task 4: Find the Employee First Name
 
@@ -110,6 +110,39 @@ def first_name(row_number):
         print(f"Stack trace: {stack_trace}")
 
 #check output
-print(f'{first_name(1)}')
-print(f'{first_name("2")}')
-print(f'{first_name("third")}')
+# print(f'{first_name(1)}')
+# print(f'{first_name("2")}')
+# print(f'{first_name("third")}')
+
+# Task 5: Find the Employee: a Function in a Function
+
+#function that returns employees by id
+#employee_id:int - employee ID
+#return: list - list of employees with id == employee_id 
+def employee_find(employee_id):
+    try:
+        #comparison function
+        def employee_match(row):
+            return int(row[employee_id_column]) == employee_id
+        #filter employee from rows data by id
+        matches = list(filter(employee_match, employees["rows"]))
+        return matches
+    except Exception as e:
+        #print type of exception
+        print(f"An exception occurred {type(e).__name__}")
+        # get and print exception message
+        message = str(e)
+        if message:
+            print(f'Exception message: {message}')
+        #trace back exception
+        trace_back = traceback.extract_tb(e.__traceback__)
+        stack_trace = list()
+        #create a stack of commands
+        for trace in trace_back:
+            stack_trace.append(f'File: {trace[0]}, Line : {trace[1]}, Func.Name : {trace[2]}, Message : {trace[3]}')
+        #print stack of commands from exception
+        print(f"Stack trace: {stack_trace}")
+
+print(f'{employee_find(3)}')
+print(f'{employee_find("2")}')
+    
