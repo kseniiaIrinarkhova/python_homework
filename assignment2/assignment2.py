@@ -172,16 +172,26 @@ def sort_by_last_name():
 
 #Task 8: Create a dict for an Employee
 
-#function that create employee object
+# #function that create employee object
+# #data:list - row from csv file
+# #return:dictionary object - employee
+# def employee_dict(data):
+#     #declare employee object
+#     employee = dict()
+#     #loop through data, except employee_id, which is 0 index
+#     for index in range(1, len(employees["fields"])):
+#         #add data to object
+#         employee[employees["fields"][index]] = data[index]
+#     return employee
+
+#function that create employee object with zip
 #data:list - row from csv file
 #return:dictionary object - employee
 def employee_dict(data):
-    #declare employee object
-    employee = dict()
-    #loop through data, except employee_id, which is 0 index
-    for index in range(1, len(employees["fields"])):
-        #add data to object
-        employee[employees["fields"][index]] = data[index]
+    #declare employee object using zip function
+    employee = dict(zip(employees["fields"], data))
+    #delete emplotee_id key
+    del employee["employee_id"]
     return employee
 
 #print result
