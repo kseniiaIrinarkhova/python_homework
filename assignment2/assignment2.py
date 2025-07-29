@@ -3,12 +3,14 @@ import csv
 import traceback
 import os
 import custom_module
+from datetime import datetime
 
 
 #global variables:
 global employees
 global employee_id_column
 global minutes_set
+global minutes_list
 
 #Helper functions
 
@@ -275,4 +277,15 @@ def create_minutes_set():
     return min1_set.union(min2_set)
 
 minutes_set = create_minutes_set()
-print(f"in minutes1 = {len(minutes1["rows"])}, in minutes2 = {len(minutes2["rows"])}, in union set = {len(minutes_set)} \n\r {minutes_set}")
+# print(f"in minutes1 = {len(minutes1["rows"])}, in minutes2 = {len(minutes2["rows"])}, in union set = {len(minutes_set)} \n\r {minutes_set}")
+
+#Task 14: Convert to datetime
+
+def create_minutes_list():
+    minutes_list = list(minutes_set)
+    converted_minutes = list(map(lambda row: (row[0], datetime.strptime(row[1], "%B %d, %Y") ), minutes_list))
+    return converted_minutes
+
+minutes_list = create_minutes_list()
+print(f"{minutes_list}")
+
