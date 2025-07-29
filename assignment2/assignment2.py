@@ -167,6 +167,22 @@ def sort_by_last_name():
     employees["rows"].sort(key=lambda row: row[last_name_column])
     return employees["rows"]
 
-print(employees["rows"])
+# print(employees["rows"])
+# print(f'{sort_by_last_name()}')
 
-print(f'{sort_by_last_name()}')
+#Task 8: Create a dict for an Employee
+
+#function that create employee object
+#data:list - row from csv file
+#return:dictionary object - employee
+def employee_dict(data):
+    #declare employee object
+    employee = dict()
+    #loop through data, except employee_id, which is 0 index
+    for index in range(1, len(employees["fields"])):
+        #add data to object
+        employee[employees["fields"][index]] = data[index]
+    return employee
+
+#print result
+print(f'{employee_dict(employees["rows"][5])}')
