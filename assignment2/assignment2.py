@@ -156,5 +156,17 @@ def employee_find_2(employee_id):
      matches = list(filter(lambda row : int(row[employee_id_column]) == employee_id , employees["rows"]))
      return matches
 
-print(f'{employee_find_2(3)}')
-print(f'{employee_find_2("2")}')
+# print(f'{employee_find_2(3)}')
+# print(f'{employee_find_2("2")}')
+
+#Task 7: Sort the Rows by last_name Using a Lambda
+
+#function that sort data by last name column
+def sort_by_last_name():
+    last_name_column = column_index("last_name")
+    employees["rows"].sort(key=lambda row: row[last_name_column])
+    return employees["rows"]
+
+print(employees["rows"])
+
+print(f'{sort_by_last_name()}')
