@@ -248,8 +248,14 @@ def set_that_secret(secret_data):
 
 #Task 12: Read minutes1.csv and minutes2.csv
 
-
-
-
+#function that read minutes files and return data as dictionary with tuples
 def read_minutes():
-    pass
+    #read minutes1.csv
+    minutes1 = read_file("../csv/minutes1.csv", True)
+    #read minutes2.csv
+    minutes2 = read_file("../csv/minutes2.csv", True)
+    return minutes1, minutes2
+
+#check the result
+minutes1, minutes2 = read_minutes()
+print(f"Minutes1 = {minutes1} \n\r Minutes2 = {minutes2}")
