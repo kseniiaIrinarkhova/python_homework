@@ -1,1 +1,3 @@
-greeting
+Function: greeting, *args (), **kwargs {}, return: None
+Function: sum_numbers, *args (1, 2, 3, 4), **kwargs {}, return: True
+Function: describe_cat, *args (), **kwargs {'name': 'Chicory', 'breed': 'maine coon', 'age': '5', 'color': 'black'}, return: <function logger_decorator at 0x000001FB0BE482C0>
