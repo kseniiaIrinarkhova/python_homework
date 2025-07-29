@@ -2,6 +2,8 @@
 import csv
 import traceback
 import os
+import custom_module
+
 
 #global variables:
 global employees
@@ -221,4 +223,14 @@ def get_this_value():
     return os.getenv("THISVALUE")
 
 #print result
-print(f"{get_this_value()}")
+# print(f"{get_this_value()}")
+
+#Task 11: Creating Your Own Module
+
+#function that set secret from custom module
+#secret_data:string - data that would be set for secret
+def set_that_secret(secret_data):
+    custom_module.set_secret(secret_data)
+
+set_that_secret("I could change you if I know you!")
+print(f"{custom_module.secret}")
