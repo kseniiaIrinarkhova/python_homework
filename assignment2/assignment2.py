@@ -56,6 +56,38 @@ def read_file(file_path, convert_to_tulple=False):
         #print stack of commands from exception
         print(f"Stack trace: {stack_trace}")
 
+# function that save data to csv file
+# file_name: string - file mane
+# data: list() - list of data
+# header: list() - header data for csv file 
+def save_to_file(file_name, data, header):
+    try:
+        #open or create file
+        with open(file_name, 'w', newline='') as file:
+            writer = csv.writer(file)
+            #add header line
+            writer.writerow(header)
+            #add data througn loop
+            for row in data:
+                writer.writerow(row)              
+    except Exception as e:
+        #print type of exception
+        print(f"An exception occurred {type(e).__name__}")
+        # get and print exception message
+        message = str(e)
+        if message:
+            print(f'Exception message: {message}')
+        #trace back exception
+        trace_back = traceback.extract_tb(e.__traceback__)
+        stack_trace = list()
+        #create a stack of commands
+        for trace in trace_back:
+            stack_trace.append(f'File: {trace[0]}, Line : {trace[1]}, Func.Name : {trace[2]}, Message : {trace[3]}')
+        #print stack of commands from exception
+        print(f"Stack trace: {stack_trace}")
+    else:
+        print(f"File '{file_name}' was updated!")
+
 #Task 2: Read a CSV File
 
 #function that read csv file and returned employees data
@@ -281,11 +313,31 @@ minutes_set = create_minutes_set()
 
 #Task 14: Convert to datetime
 
+#function that convert united set to list with datetime instead of string
 def create_minutes_list():
+    #convert set to list
     minutes_list = list(minutes_set)
+    #convert data in list to tuples with datatime values
     converted_minutes = list(map(lambda row: (row[0], datetime.strptime(row[1], "%B %d, %Y") ), minutes_list))
+    #return converted data
     return converted_minutes
 
+#check the result
 minutes_list = create_minutes_list()
-print(f"{minutes_list}")
+# print(f"{minutes_list}")
 
+#Task 15: Write Out Sorted List
+
+#function that write sorted data to csv file
+def write_sorted_list():
+    #sort data by time
+    sorted_minutes = sorted(minutes_list, key=lambda row: row[1])
+    #convert data to tuple of 2 strings
+    converted_minutes = list(map(lambda row: (row[0], datetime.strftime(row[1],"%B %d, %Y")), sorted_minutes))
+    #call helper function to save the data
+    save_to_file('./minutes.csv', converted_minutes, minutes1["fields"])
+    #return corted and converted list
+    return converted_minutes
+
+#check result
+# print(f'{write_sorted_list()}')
