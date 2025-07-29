@@ -9,15 +9,12 @@ import custom_module
 global employees
 global employee_id_column
 
-#Task 2: Read a CSV File
+#Helper functions
 
-#function that read csv file and returned employees data
-#return - dictionary of data from csv file:
-#{
-#[Key: fields]: list()
-#[Key: rows]: list()
-#}
-def read_employees():
+#function that read csv file and return dictionary of headets and rows
+#file_path:string - path to CSV file
+#convert_to_tulple:boolean - flag that emphasize that need convertion of row data to tuple. By defaule - false 
+def read_file(file_path, convert_to_tulple=False):
     #declare variables
     csv_data_dict = dict()
     csv_rows = list()
@@ -25,14 +22,17 @@ def read_employees():
     #try to read csv file
     try:
         #open file for reading
-        with open('../csv/employees.csv', 'r') as file:
+        with open(file_path, 'r') as file:
             # create reader object
             reader = csv.reader(file)
             #get 1st line and save it to dictionary as headers
             csv_data_dict['fields'] = next(reader)
             #loop through rows and add them to list
             for row in reader:
-                csv_rows.append(row)
+                if(convert_to_tulple):
+                    csv_rows.append(tuple(row))
+                else:
+                    csv_rows.append(row)
             #add list to dictionary
             csv_data_dict['rows'] = csv_rows
             #return data
@@ -52,6 +52,17 @@ def read_employees():
             stack_trace.append(f'File: {trace[0]}, Line : {trace[1]}, Func.Name : {trace[2]}, Message : {trace[3]}')
         #print stack of commands from exception
         print(f"Stack trace: {stack_trace}")
+
+#Task 2: Read a CSV File
+
+#function that read csv file and returned employees data
+#return - dictionary of data from csv file:
+#{
+#[Key: fields]: list()
+#[Key: rows]: list()
+#}
+def read_employees():
+    return read_file('../csv/employees.csv')
 
 #test the output
 employees = read_employees()
@@ -232,5 +243,13 @@ def get_this_value():
 def set_that_secret(secret_data):
     custom_module.set_secret(secret_data)
 
-set_that_secret("I could change you if I know you!")
-print(f"{custom_module.secret}")
+# set_that_secret("I could change you if I know you!")
+# print(f"{custom_module.secret}")
+
+#Task 12: Read minutes1.csv and minutes2.csv
+
+
+
+
+def read_minutes():
+    pass
