@@ -195,4 +195,21 @@ def employee_dict(data):
     return employee
 
 #print result
-print(f'{employee_dict(employees["rows"][5])}')
+# print(f'{employee_dict(employees["rows"][5])}')
+
+#Task 9: A dict of dicts, for All Employees
+
+#function that created dictionary for all employees
+#return: dictionary
+#[key:employee_id]: value - dict()employee data
+def all_employees_dict():
+    #declare dictionary for employees
+    employees_dict = dict()
+    #loop through rows
+    for row in employees["rows"]:
+        #create employee entry
+        employees_dict[row[0]] = employee_dict(row)
+    return employees_dict
+
+#print result
+print(f'{all_employees_dict()}')
