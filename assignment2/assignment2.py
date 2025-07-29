@@ -1,6 +1,7 @@
 #import libs
 import csv
 import traceback
+import os
 
 #global variables:
 global employees
@@ -212,4 +213,12 @@ def all_employees_dict():
     return employees_dict
 
 #print result
-print(f'{all_employees_dict()}')
+# print(f'{all_employees_dict()}')
+
+#Task 10: Use the os Module
+#function that read THISVALUE env variable
+def get_this_value():
+    return os.getenv("THISVALUE")
+
+#print result
+print(f"{get_this_value()}")
