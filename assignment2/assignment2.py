@@ -8,6 +8,7 @@ import custom_module
 #global variables:
 global employees
 global employee_id_column
+global minutes_set
 
 #Helper functions
 
@@ -258,4 +259,20 @@ def read_minutes():
 
 #check the result
 minutes1, minutes2 = read_minutes()
-print(f"Minutes1 = {minutes1} \n\r Minutes2 = {minutes2}")
+# print(f"Minutes1 = {minutes1} \n\r Minutes2 = {minutes2}")
+
+#Task 13: Create minutes_set
+
+#function that create union set from 2 lists of minutes data
+def create_minutes_set():
+    #read lists of data from files
+    minutes1, minutes2 = read_minutes()
+    #create set from 1st list
+    min1_set = set(minutes1["rows"])
+    #create set from 2nd list
+    min2_set = set(minutes2["rows"])
+    #return union of 2 sets
+    return min1_set.union(min2_set)
+
+minutes_set = create_minutes_set()
+print(f"in minutes1 = {len(minutes1["rows"])}, in minutes2 = {len(minutes2["rows"])}, in union set = {len(minutes_set)} \n\r {minutes_set}")
