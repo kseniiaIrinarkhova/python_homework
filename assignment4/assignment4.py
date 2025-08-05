@@ -41,4 +41,17 @@ task1_older['Age'] = age_series
 
 # task1_older.to_csv('employees.csv', sep=',', index=False)
 
+#Task 2: Loading Data from CSV and JSON
 
+#read the data from CSV
+task2_employees = pd.read_csv('employees.csv')
+# print(task2_employees)
+
+#read the data from json file
+json_employees = pd.read_json('additional_employees.json')
+# print(json_employees )
+
+#combine CSV and JSON data
+more_employees = pd.concat([task2_employees, json_employees], ignore_index=True)
+
+# print(more_employees)
