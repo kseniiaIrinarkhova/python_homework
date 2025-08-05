@@ -55,3 +55,21 @@ json_employees = pd.read_json('additional_employees.json')
 more_employees = pd.concat([task2_employees, json_employees], ignore_index=True)
 
 # print(more_employees)
+
+#Task 3: Data Inspection - Using Head, Tail, and Info Methods
+
+#get top 3 employees from DataFrame
+first_three = more_employees.head(3)
+# print(first_three)
+
+##get last 2 employees
+last_two = more_employees.tail(2)
+# print(last_two)
+
+#get shape of DataFrame
+employee_shape = more_employees.shape
+# print(employee_shape)
+
+#use info method
+
+# more_employees.info()
