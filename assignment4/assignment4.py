@@ -1,5 +1,16 @@
 #import libs and frameworks
 import pandas as pd
+from dateutil import parser
+
+#additional data
+UNKNOWN = ["unknown", "NaN", "n/a"]
+
+#helper function to parce the dates
+def parse_date_safe(date_str):
+    try:
+        return parser.parse(date_str, dayfirst=True)  
+    except (ValueError, TypeError):
+        return pd.NaT
 
 #Task 1: Introduction to Pandas - Creating and Manipulating DataFrames
 
@@ -71,5 +82,44 @@ employee_shape = more_employees.shape
 # print(employee_shape)
 
 #use info method
-
 # more_employees.info()
+
+#Task 4: Data Cleaning
+
+#read dirty data from CSV
+dirty_data = pd.read_csv('dirty_data.csv')
+# print(dirty_data)
+
+#make a copy of data
+clean_data = dirty_data.copy()
+#delete duplicates
+clean_data = clean_data.drop_duplicates()
+#clean Age column
+clean_data['Age'] = pd.to_numeric(clean_data['Age'], errors='coerce')
+#clean Salary column
+clean_data["Salary"] = pd.to_numeric(clean_data['Salary'], errors='coerce')
+
+#fill the missing data
+mean_age = clean_data['Age'].mean()
+clean_data['Age']  = clean_data['Age'].fillna(mean_age)
+median_salary = clean_data['Salary'].median()
+clean_data['Salary'] = clean_data['Salary'].fillna(median_salary)
+
+#convert hire date to datatime
+clean_data['Hire Date'] = pd.to_datetime(clean_data['Hire Date'], errors='coerce')
+
+#Text Standardization
+#strip whitespace
+clean_data['Name'] = clean_data['Name'].str.strip()
+clean_data['Department'] = clean_data['Department'].str.strip()
+#convert columns to uppercase
+clean_data['Name'] = clean_data['Name'].str.upper()
+clean_data['Department'] = clean_data['Department'].str.upper()
+
+#convert NaT Hire Dates
+dirty_dates = dirty_data['Hire Date'].copy()
+clean_dates = dirty_dates.apply(parse_date_safe) #use dateutil parser because it is more flexible
+
+clean_data['Hire Date'] = clean_dates
+
+print(clean_data)
